@@ -7,35 +7,32 @@
 # [*ensure*]
 #  present / absent. Default: present
 #
-# [*hosts*]
-#  Allowed host list.
-#
-# [*options*]
-#  List of NFS options. Default: rw,sync,no_root_squash,no_subtree_check
+# [*export*]
+#  A hash of hosts and options for an export. Allows one to specify
+#  a single nfs export with multiple hosts & options per host
 #
 # === Examples
 #
 # include nfs::server
 #
 # nfs::export { '/data/nfs':
-#   hosts   => '10.1.1.0/24',
-#   options => 'rw,sync,no_root_squash,no_subtree_check',
+#   export => {
+#     # host           options
+#     '10.1.1.0/24' => 'rw,sync,no_root_squash,no_subtree_check',
+#     '192.168.1.1' => 'ro,async',
+#   },
 # }
+
 #
 # === Authors
 #
 # Sergey Stankevich
+# Steffen L. Norgren
 #
 define nfs::export (
   $ensure  = present,
-  $hosts   = false,
-  $options = 'rw,sync,no_root_squash,no_subtree_check'
+  $export = {},
 ) {
-
-  # Parameter validation
-  if ! $hosts {
-    fail('nfs::export: hosts parameter must not be empty')
-  }
 
   concat::fragment { "nfs_export_${name}":
     ensure  => $ensure,
