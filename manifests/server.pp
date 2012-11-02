@@ -35,10 +35,10 @@ class nfs::server {
   include concat::setup
 
   concat { '/etc/exports':
-    mode    => '0644',
-    owner   => 'root',
-    group   => 'root',
-    notify  => Service['nfs-kernel-server'],
+    mode   => '0644',
+    owner  => 'root',
+    group  => 'root',
+    notify => Service['nfs-kernel-server'],
   }
 
 }

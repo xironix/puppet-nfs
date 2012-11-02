@@ -22,7 +22,6 @@
 #     '192.168.1.1' => 'ro,async',
 #   },
 # }
-
 #
 # === Authors
 #
@@ -30,14 +29,14 @@
 # Steffen L. Norgren
 #
 define nfs::export (
-  $ensure  = present,
+  $ensure = present,
   $export = {},
 ) {
 
   concat::fragment { "nfs_export_${name}":
     ensure  => $ensure,
     target  => '/etc/exports',
-    order   => '20',
+    order   => '10',
     content => template('nfs/exports.erb'),
   }
 
