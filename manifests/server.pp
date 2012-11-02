@@ -41,12 +41,4 @@ class nfs::server {
     notify  => Service['nfs-kernel-server'],
   }
 
-  concat::fragment { 'nfs_config':
-    ensure  => present,
-    target  => '/etc/exports',
-    order   => '10',
-    content => '',
-    notify  => Service['nfs-kernel-server'],
-  }
-
 }
