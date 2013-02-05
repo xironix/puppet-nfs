@@ -1,7 +1,7 @@
 class nfs::config {
 
   if $::operatingsystem == 'Debian' {
-    service { 'nfs-common':
+    service { 'nfs-kernel-server':
       ensure     => running,
       enable     => true,
       hasrestart => true,
