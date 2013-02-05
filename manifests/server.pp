@@ -24,14 +24,6 @@ class nfs::server {
 
   package { 'nfs-kernel-server': ensure => present }
 
-  service { 'nfs-kernel-server':
-    ensure     => running,
-    enable     => true,
-    hasrestart => true,
-    hasstatus  => false,
-    pattern    => 'rpc.mountd',
-  }
-
   include concat::setup
 
   concat { '/etc/exports':
