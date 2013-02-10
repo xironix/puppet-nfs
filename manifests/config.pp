@@ -10,7 +10,7 @@ class nfs::config {
     }
 
     File['/etc/default/nfs-common'] {
-      notify => Service['nfs-kernel-server'],
+      notify => Service['nfs-common'],
     }
   }
 
